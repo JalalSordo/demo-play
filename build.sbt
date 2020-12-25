@@ -1,8 +1,10 @@
+import sbt._
+
 name := "demo-play"
  
 version := "1.0"
 
-lazy val `demo-play` = (project in file(".")).enablePlugins(PlayJava)
+lazy val web = (project in file("web")).enablePlugins(PlayJava)
 
 resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
       
