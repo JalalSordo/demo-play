@@ -1,17 +1,20 @@
 import sbt._
+import sbt.Keys.{publishArtifact, _}
 
-name := "demo-play"
- 
-version := "1.0"
+lazy val commonSettings = Seq(
+    organization  := "com.synthesissolutions",
+    version := "1.0-SNAPSHOT",
+    scalaVersion := "2.11.6"
 
-lazy val web = (project in file("web")).enablePlugins(PlayJava)
+)
 
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
-      
-scalaVersion := "2.11.11"
-
-libraryDependencies ++= Seq( javaJdbc , cache , javaWs )
-
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
-
-      
+lazy val web = (project in file("web")).
+  settings(commonSettings: _*).
+  settings(
+    /* Project specific settings here */
+    name := "web-demo",
+    libraryDependencies ++= Seq( javaJdbc,
+      cache, filters, javaWs),
+    unmanagedResourceDirectories in Test <+= baseDirectory ( _ / "target/web/public/test" ),
+    routesGenerator := InjectedRoutesGenerator,
+    publishArtifact in (Compile, packageBin) := false ).enablePlugins(PlayJava)
