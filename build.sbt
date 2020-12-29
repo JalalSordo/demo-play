@@ -1,5 +1,6 @@
 import sbt._
 import sbt.Keys.{publishArtifact, _}
+import NativePackagerKeys._
 
 lazy val commonSettings = Seq(
     organization  := "com.synthesissolutions",
