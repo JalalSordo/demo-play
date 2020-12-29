@@ -1,1 +1,1 @@
-web: web/target/universal/stage/bin/gpl-web -Dhttp.port=$PORT
+web: web/target/universal/stage/bin/web-demo -Dhttp.port=$PORT
